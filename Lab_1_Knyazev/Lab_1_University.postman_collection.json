@@ -1,0 +1,455 @@
+{
+	"info": {
+		"_postman_id": "ef979f89-cada-420e-ad30-f11cac7c187f",
+		"name": "Lab_1_University",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39522464"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"login\": \"user\",\r\n  \"password\": \"user\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Auth",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Exam",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"code\": 0,\r\n  \"subject\": \"string\",\r\n  \"professor\": \"string\",\r\n  \"auditori\": 0,\r\n  \"startTime\": \"2024-11-05T21:08:05.332Z\",\r\n  \"endTime\": \"2024-11-05T21:08:05.332Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Exams",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Exams",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Exams?TimeFrom=2023-10-28T18%3A49%3A07.098Z&TimeTo=2025-10-28T18%3A49%3A07.098Z",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams"
+					],
+					"query": [
+						{
+							"key": "TimeFrom",
+							"value": "2023-10-28T18%3A49%3A07.098Z"
+						},
+						{
+							"key": "TimeTo",
+							"value": "2025-10-28T18%3A49%3A07.098Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Exam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Exams/:id",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student on Exam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Exams/:id/GetExams",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams",
+						":id",
+						"GetExams"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Exam",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"code\": 0,\r\n  \"subject\": \"string\",\r\n  \"professor\": \"string\",\r\n  \"auditori\": 0,\r\n  \"startTime\": \"2024-11-05T21:08:05.332Z\",\r\n  \"endTime\": \"2024-11-05T21:08:05.332Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Exams/",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Exam",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Exams/:id",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Student",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"string\",\r\n  \"surname\": \"string\",\r\n  \"group\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Students",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Students",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Students",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Students/:id",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student's Exam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Students/:id/GetStudents",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students",
+						":id",
+						"GetStudents"
+					],
+					"query": [
+						{
+							"key": "current",
+							"value": "true",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Students",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 2,\r\n  \"name\": \"159\",\r\n  \"surname\": \"string\",\r\n  \"group\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Students/",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Exams",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  6\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Students/:id/ModifyExams",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students",
+						":id",
+						"ModifyExams"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Student",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Student/:id",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Student",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTczMDE0MTY5MywiZXhwIjoxNzMwMTQ1MjkzLCJpc3MiOiJNeUF1dGhTZXJ2ZXIiLCJhdWQiOiJNeUF1dGhDbGllbnQifQ.QbmCJM2OpOJSVOUPco1MGijalRdq7z2go1X6zQriTMA",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Host",
+			"value": "https://localhost:7017"
+		}
+	]
+}
