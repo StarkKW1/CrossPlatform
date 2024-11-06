@@ -1,0 +1,31 @@
+foreach (var examId in ExamsID)
+{
+    var exam = await _context.Exams.FindAsync(examId);
+    if (exam == null)
+        return false;
+    Console.WriteLine("exam: " + exam.Subject);
+    if (exam.Students.Contains(student))
+        continue;
+    if (exam.StartTime.ToUniversalTime() >= DateTime.UtcNow.AddHours(1))
+    {
+        if (mode)
+        {
+            if (exam.Students.Contains(student))
+                continue;
+            else
+                exam.Students.Add(student);
+        }   
+        else
+        {
+            if (exam.Students.Contains(student))
+                exam.Students.Remove(student);
+            else
+                continue;
+        }
+            
+        
+        Console.WriteLine("GetStudentOnExam count = " + exam.Students.Count);
+    }
+    else
+        return false;
+}

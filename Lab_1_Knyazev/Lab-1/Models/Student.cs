@@ -11,6 +11,7 @@ namespace Lab_1.Models
         public string Name { get; set; } = string.Empty;
         public string Surname { get; set; } = string.Empty;
         public string Group { get; set; } = string.Empty;
+
         //public List<Exam>? Exams { get; set; } = null;
 
         //public Student() { }

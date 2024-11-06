@@ -9,16 +9,16 @@ namespace Lab_1
 {
     internal class AuthOptions
     {
-        public const string ISSUER = "MyAuthServer"; // издатель токена
-        public const string AUDIENCE = "MyAuthClient"; // потребитель токена
-        const string KEY = "MySuperSecretUltraLoooooooooongSymmetricSecurityKey"; // ключ для шифрации
-        public const int LIFETIME = 1; // время жизни токена - 1 минута
+        public const string ISSUER = "AuthServer"; 
+        public const string AUDIENCE = "AuthClient"; 
+        const string KEY = "SymmetricSecurityKeySymmetricSecurityKeySymmetricSecurityKey"; 
+        public const int LIFETIME = 1; 
 
-        // тестовые данные вместо использования базы данных
+  
         private static List<User> users = new List<User>
         {
-            new User {Login="admin", Password="admin", Role = "admin" },
-            new User { Login="user", Password="user", Role = "user" }
+            new User {Login="knyazev_admin", Password="pass", Role = "admin" },
+            new User { Login="knyazev_user", Password="pass", Role = "user" }
         };
 
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
@@ -30,7 +30,7 @@ namespace Lab_1
         {
             var now = DateTime.UtcNow;
 
-            // создаем JWT-токен
+
             var jwt = new JwtSecurityToken(
                 issuer: AuthOptions.ISSUER,
                 audience: AuthOptions.AUDIENCE,
@@ -59,7 +59,7 @@ namespace Lab_1
                 return claimsIdentity;
             }
 
-            // если пользователя не найдено
+
             return null;
         }
     }

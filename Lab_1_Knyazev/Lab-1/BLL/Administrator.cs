@@ -47,6 +47,8 @@ namespace Lab_1.BLL
                                  from stud in exam.Students
                                  where stud.ID == studentId
                                  select exam;
+            Console.WriteLine("studentId: " + studentId + ", current = " + current + "Exams count = " + exams.ToList().Count());
+            
             if (current)
             {
                 return await exams.Where(ex => ex.StartTime >= DateTime.UtcNow).OrderBy(ex => ex.StartTime).Select(ex => new ExamDTO(ex)).ToListAsync();
@@ -79,23 +81,39 @@ namespace Lab_1.BLL
             if (student == null)
                 return false;
 
+            Console.WriteLine("student: " + student.Name);
+
             foreach (var examId in ExamsID)
             {
-                var exam = await _context.Exams.FindAsync(examId);
+                var exam = await _context.Exams.Include(ex => ex.Students).FirstOrDefaultAsync(ex => ex.Code == examId);
                 if (exam == null)
                     return false;
+
+                Console.WriteLine("exam: " + exam.Subject + ", student count = " + exam.Students.Count);
+
                 if (exam.StartTime.ToUniversalTime() >= DateTime.UtcNow.AddHours(1))
                 {
                     if (mode)
-                        exam.Students.Add(student);
+                    {
+                        if (exam.Students.Contains(student))
+                            continue;
+                        else
+                            exam.Students.Add(student);
+                    }
                     else
-                        exam.Students.Remove(student);
+                    {
+                        if (exam.Students.Contains(student))
+                            exam.Students.Remove(student);
+                        else
+                            continue;
+                    }
+                    //Console.WriteLine("GetStudentOnExam count = " + exam.Students.Count);
                 }
                 else
                     return false;
             }
 
-            _context.Students.Update(student);
+            //_context.Students.Update(student);
 
             try
             {
@@ -131,13 +149,9 @@ namespace Lab_1.BLL
         #endregion
 
         #region Exam
-        public async Task<bool> AddExam(ExamDTO ex)
+        public async Task<Exam> AddExam(Exam exam)
         {
-            //var exam = await _context.Exams.FindAsync(ex.Code);
-            //if (exam != null)
-            //    return false;
-
-            await _context.Exams.AddAsync(new Exam(ex));
+            await _context.Exams.AddAsync(exam);
 
             try
             {
@@ -145,29 +159,37 @@ namespace Lab_1.BLL
             }
             catch (DbUpdateConcurrencyException)
             {
-                return false;
+                return null;
             }
-            return true;
+            return exam;
         }
 
-        public async Task<List<ExamDTO>?> GetExams(DateTime? TimeFrom, DateTime? TimeTo)
+        public async Task<List<Exam>?> GetExams(DateTime? TimeFrom, DateTime? TimeTo)
         {
             if (TimeFrom == null & TimeTo == null)
+                return await _context.Exams.ToListAsync();
+            else if (TimeFrom == null)
+                return await _context.Exams.Where(Exam => Exam.StartTime <= TimeTo).ToListAsync();
+            else if (TimeTo == null)
+                return await _context.Exams.Where(Exam => Exam.StartTime >= TimeFrom).ToListAsync();
+            else
+                return await _context.Exams.Where(Exam => Exam.StartTime >= TimeFrom & Exam.StartTime <= TimeTo).ToListAsync();
+            /*if (TimeFrom == null & TimeTo == null)
                 return await _context.Exams.Select(u => new ExamDTO(u)).ToListAsync();
             else if (TimeFrom == null)
                 return await _context.Exams.Where(Exam => Exam.StartTime <= TimeTo).Select(u => new ExamDTO(u)).ToListAsync();
             else if (TimeTo == null)
                 return await _context.Exams.Where(Exam => Exam.StartTime >= TimeFrom).Select(u => new ExamDTO(u)).ToListAsync();
             else
-                return await _context.Exams.Where(Exam => Exam.StartTime >= TimeFrom & Exam.StartTime <= TimeTo).Select(u => new ExamDTO(u)).ToListAsync();
+                return await _context.Exams.Where(Exam => Exam.StartTime >= TimeFrom & Exam.StartTime <= TimeTo).Select(u => new ExamDTO(u)).ToListAsync();*/
         }
 
-        public async Task<ExamDTO?> GetExam(int code)
+        public async Task<Exam?> GetExam(int code)
         {
-            var ex = await _context.Exams.FindAsync(code);
-            if (ex == null)
+            var exam = await _context.Exams.FindAsync(code);
+            if (exam == null)
                 return null;
-            return new ExamDTO(ex);
+            return exam;
         }
 
         public async Task<List<Student>?> GetStudentOnExam(int code)
@@ -175,16 +197,13 @@ namespace Lab_1.BLL
             var exam = await _context.Exams.Include("Students").FirstOrDefaultAsync(ex => ex.Code == code);
             if (exam == null) 
                 return null;
+            Console.WriteLine("GetStudentOnExam count = " + exam.Students.Count);
             return exam.Students;
         }
 
-        public async Task<bool> UpdateExam(ExamDTO ex)
+        public async Task<bool> UpdateExam(Exam exam)
         {
-            var exam = await _context.Exams.FindAsync(ex.Code);
-            if (exam == null)
-                return false;
-
-            _context.Exams.Update(exam.Update(ex));
+            _context.Exams.Update(exam);
 
             try
             {

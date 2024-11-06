@@ -1,0 +1,489 @@
+{
+	"info": {
+		"_postman_id": "5b9fdfec-19ad-455f-8cb1-4e06ee6989e6",
+		"name": "Lab_1_University",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39522464"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia255YXpldl9hZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwibmJmIjoxNzMwODY5NDQxLCJleHAiOjE3MzA4NzMwNDEsImlzcyI6IkF1dGhTZXJ2ZXIiLCJhdWQiOiJBdXRoQ2xpZW50In0.tRpfpbQh56dTeYxz2J_jhf6G1n0a7zvNVsXBqEbQOBI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"login\": \"knyazev_admin\",\r\n  \"password\": \"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Auth",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Exam",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": 3,\r\n    \"subject\": \"Physics\",\r\n    \"professor\": \"Chernoucan\",\r\n    \"auditori\": 20,\r\n    \"startTime\": \"2024-12-05T21:08:05.332\",\r\n    \"endTime\": \"2024-12-05T21:08:05.332\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Exams",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Exams",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Exams",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams"
+					],
+					"query": [
+						{
+							"key": "TimeFrom",
+							"value": "2023-10-28T18%3A49%3A07.098Z",
+							"disabled": true
+						},
+						{
+							"key": "TimeTo",
+							"value": "2025-10-28T18%3A49%3A07.098Z",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Exam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Exams/:id",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student on Exam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Exams/:id/GetStudents",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams",
+						":id",
+						"GetStudents"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Exam",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia255YXpldl9hZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwibmJmIjoxNzMwODczNTM0LCJleHAiOjE3MzA4NzcxMzQsImlzcyI6IkF1dGhTZXJ2ZXIiLCJhdWQiOiJBdXRoQ2xpZW50In0.K9F7ckd9pnALG7SzPV3Dtp9DWZGtG2HlEcipzaFS71I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"code\": 3,\r\n        \"subject\": \"Physics\",\r\n        \"professor\": \"Chernoucan\",\r\n        \"auditori\": 20,\r\n        \"startTime\": \"2024-12-05T21:08:05.332\",\r\n        \"endTime\": \"2024-12-05T21:08:05.332\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Exams/",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Exam",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Exams/:id",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Exams",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Student",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 5,\r\n    \"name\": \"Masha\",\r\n    \"surname\": \"Stepura\",\r\n    \"group\": \"AC-21-04\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Students",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Students",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Students",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Students/:id",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student's Exam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Students/:id/GetExams",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students",
+						":id",
+						"GetExams"
+					],
+					"query": [
+						{
+							"key": "current",
+							"value": "true",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Students",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Students/",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Exams",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    3\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Host}}/api/Students/:id/ModifyExams?mode=true",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Students",
+						":id",
+						"ModifyExams"
+					],
+					"query": [
+						{
+							"key": "mode",
+							"value": "true"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Student",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}/api/Student/:id",
+					"host": [
+						"{{Host}}"
+					],
+					"path": [
+						"api",
+						"Student",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia255YXpldl9hZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwibmJmIjoxNzMwODg3MDc2LCJleHAiOjE3MzA4OTA2NzYsImlzcyI6IkF1dGhTZXJ2ZXIiLCJhdWQiOiJBdXRoQ2xpZW50In0.6xMMZYzWM3haMMtO9rSL3Q-0piPsyRWfAWTTpB1t9Ok",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Host",
+			"value": "https://localhost:7017"
+		}
+	]
+}

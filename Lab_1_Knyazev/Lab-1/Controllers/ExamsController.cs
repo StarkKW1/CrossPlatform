@@ -20,9 +20,11 @@ namespace Lab_1.Controllers
         
         [HttpPost] // POST: api/Exams
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult<ExamDTO>> AddExam([FromBody] ExamDTO exam)
+        public async Task<ActionResult<ExamDTO>> AddExam([FromBody] ExamDTO ex)
         {
-            return await administrator.AddExam(exam) ? CreatedAtAction(nameof(GetExams), new { id = exam.Code }, exam) : BadRequest("failed to add exam");
+            Exam exam = await administrator.AddExam(new Exam(ex));
+            return exam != null ? CreatedAtAction(nameof(GetExams), new { id = exam.Code }, exam) : BadRequest("failed to add passenger");
+            //return await administrator.AddExam(exam) ? CreatedAtAction(nameof(GetExams), new { id = exam.Code }, exam) : BadRequest("failed to add exam");
         }
         
         [HttpGet] // GET: api/Exams
@@ -31,7 +33,7 @@ namespace Lab_1.Controllers
             var exams = await administrator.GetExams(TimeFrom, TimeTo);
             if (exams == null)
                 return NotFound();
-            return exams;
+            return exams.Select(ex => new ExamDTO(ex)).ToList();
         }
         
         [HttpGet("{code}")] // GET: api/Exams/5
@@ -40,7 +42,7 @@ namespace Lab_1.Controllers
             var exam = await administrator.GetExam(code);
             if (exam == null)
                 return NotFound();
-            return exam;
+            return new ExamDTO(exam);
         }
         
         [HttpGet("{code}/GetStudents")] // GET: api/Exams/5
@@ -57,7 +59,7 @@ namespace Lab_1.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> PutExam([FromBody] ExamDTO exam)
         {
-            return await administrator.UpdateExam(exam) ? CreatedAtAction(nameof(GetExams), new { id = exam.Code }, exam) : NotFound();
+            return await administrator.UpdateExam(new Exam(exam)) ? Ok() : NotFound();
         }
         
         [HttpDelete("{code}")] // DELETE: api/Exams/5

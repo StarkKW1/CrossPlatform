@@ -13,7 +13,7 @@ namespace Lab_1.Data
         public Lab1Context (DbContextOptions<Lab1Context> options)
             : base(options)
         {
-            Database.EnsureCreated(); // создаёт базу данных
+            Database.EnsureCreated(); // Create DB
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
