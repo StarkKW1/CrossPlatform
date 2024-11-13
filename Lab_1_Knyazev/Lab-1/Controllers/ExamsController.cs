@@ -52,6 +52,16 @@ namespace Lab_1.Controllers
             return students;
         }
 
+        [HttpGet("{code}/GetStudentsWithFail")]
+        [Authorize(Roles = "admin, user")]
+        public async Task<ActionResult<List<StudentDTO>>> GetStudentsOnExamWithFail(int code)
+        {
+            var students = await administrator.GetStudentOnExamWithFail(code);
+            if (students == null)
+                return NotFound();
+            return students;
+        }
+
         [HttpPut("{code}/SetMarks")]
         [Authorize(Roles = "admin")] // Dictionary<Ключ(int): ID студента, Значение(int): оценка за этот экзамен>
         public async Task<IActionResult> SetMarkStudents(int code, Dictionary<int, int> StudentsMarks)

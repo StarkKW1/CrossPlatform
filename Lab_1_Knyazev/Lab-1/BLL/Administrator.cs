@@ -306,6 +306,17 @@ namespace Lab_1.BLL
             return await selectedPeople.Select(st => (StudentDTO)st).ToListAsync();
         }
 
+        public async Task<List<StudentDTO>?> GetStudentOnExamWithFail(int code)
+        {
+            var selectedPeople = from student in _context.Students.Include(st => st.Group)
+                                 from session in student.Sessions
+                                 where session.Exam.Code == code
+                                 where session.Mark < 3
+                                 select student;
+
+            return await selectedPeople.Select(st => (StudentDTO)st).ToListAsync();
+        }
+
         public async Task<int> SetMarks(int code, Dictionary<int, int> StudentMarks)
         {
             //var selectedPeople = from student in _context.Students
