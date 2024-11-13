@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Lab_1.Data;
+﻿using Lab_1.BLL;
 using Lab_1.Models;
-using Lab_1.BLL;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Lab_1.Controllers
@@ -18,51 +16,67 @@ namespace Lab_1.Controllers
             this.administrator = administrator;
         }
         
-        [HttpPost] // POST: api/Exams
+        [HttpPost]
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult<ExamDTO>> AddExam([FromBody] ExamDTO ex)
+        public async Task<ActionResult<Exam>> AddExam([FromBody] Exam ex)
         {
-            Exam exam = await administrator.AddExam(new Exam(ex));
-            return exam != null ? CreatedAtAction(nameof(GetExams), new { id = exam.Code }, exam) : BadRequest("failed to add passenger");
-            //return await administrator.AddExam(exam) ? CreatedAtAction(nameof(GetExams), new { id = exam.Code }, exam) : BadRequest("failed to add exam");
+            Exam exam = await administrator.AddExam(ex);
+            return exam != null ? CreatedAtAction(nameof(GetExams), new { id = exam.Code }, exam) : BadRequest("failed to add exam");
         }
         
-        [HttpGet] // GET: api/Exams
-        public async Task<ActionResult<IEnumerable<ExamDTO>>> GetExams(DateTime? TimeFrom, DateTime? TimeTo)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Exam>>> GetExams(DateTime? TimeFrom, DateTime? TimeTo)
         {
             var exams = await administrator.GetExams(TimeFrom, TimeTo);
             if (exams == null)
                 return NotFound();
-            return exams.Select(ex => new ExamDTO(ex)).ToList();
+            return exams.Select(ex => ex).ToList();
         }
         
-        [HttpGet("{code}")] // GET: api/Exams/5
-        public async Task<ActionResult<ExamDTO>> GetExam(int code)
+        [HttpGet("{code}")]
+        public async Task<ActionResult<Exam>> GetExam(int code)
         {
             var exam = await administrator.GetExam(code);
             if (exam == null)
                 return NotFound();
-            return new ExamDTO(exam);
+            return exam;
         }
         
-        [HttpGet("{code}/GetStudents")] // GET: api/Exams/5
+        [HttpGet("{code}/GetStudents")]
         [Authorize(Roles = "admin, user")]
-        public async Task<ActionResult<List<Student>>> GetStudentsOnExam(int code)
+        public async Task<ActionResult<List<StudentDTO>>> GetStudentsOnExam(int code)
         {
             var students = await administrator.GetStudentOnExam(code);
             if (students == null)
                 return NotFound();
             return students;
         }
-        
-        [HttpPut] // PUT: api/Exams
-        [Authorize(Roles = "admin")]
-        public async Task<IActionResult> PutExam([FromBody] ExamDTO exam)
+
+        [HttpPut("{code}/SetMarks")]
+        [Authorize(Roles = "admin")] // Dictionary<Ключ(int): ID студента, Значение(int): оценка за этот экзамен>
+        public async Task<IActionResult> SetMarkStudents(int code, Dictionary<int, int> StudentsMarks)
         {
-            return await administrator.UpdateExam(new Exam(exam)) ? Ok() : NotFound();
+            var status = await administrator.SetMarks(code, StudentsMarks);
+            if (status == 1)
+                return Ok();
+            else if (status == 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest("Mark value must be in [2, 5]");
+            }
+        }
+
+        [HttpPut]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> PutExam([FromBody] Exam exam)
+        {
+            return await administrator.UpdateExam(exam) ? Ok() : NotFound();
         }
         
-        [HttpDelete("{code}")] // DELETE: api/Exams/5
+        [HttpDelete("{code}")]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteExam(int code)
         {
