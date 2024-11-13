@@ -9,7 +9,7 @@
         public Exam Exam { get; set; }
 
         public int Semestr { get; set; } = 0; // Семестр обучения
-        public int Mark { get; set; } = 0;   // оценка студента
+        public int Mark { get; set; } = 0;   // Оценка студента
 
         public Session() { }
 
@@ -24,8 +24,9 @@
 
         public void SetMark(int mark)
         {
-            if (Exam.Date.ToUniversalTime() <= DateTime.UtcNow)
-                this.Mark = mark;
+            //if (Exam.Date.ToUniversalTime() <= DateTime.UtcNow)
+            //    this.Mark = mark;
+            this.Mark = mark;
         }
     }
 }

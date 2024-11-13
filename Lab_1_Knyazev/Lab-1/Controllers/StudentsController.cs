@@ -88,15 +88,15 @@ namespace Lab_1.Controllers
             return (await administrator.UpdateStudent(stud)) ? CreatedAtAction(nameof(GetStudent), new { id = stud.ID }, stud) : NotFound();
         }
 
-        [HttpPut("{id}/ModifyExams")] // При mode == true записывает студента на экзамент, а при false убирает с них (значение семстра при удалении не важно)
-        [Authorize(Roles = "admin")] // Dictionary<Ключ(int): code экзамена на котррый нужно записать этого студента, Значение(int): семестр к которому относится экзамен>
+        [HttpPut("{id}/ModifyExams")] // При mode == true записывает студента на экзамен, а при false убирает с них (значение семстра при удалении не важно)
+        [Authorize(Roles = "admin")] // Dictionary<Ключ(int): code экзамена на который нужно записать этого студента, Значение(int): семестр к которому относится экзамен>
         public async Task<IActionResult> ModifyStudentExams(int id, [FromBody] Dictionary<int, int> ExamsID, bool mode)
         {
             return (await administrator.ModifyStudentExams(id, ExamsID, mode)) ? Ok() : NotFound();
         }
 
         [HttpPut("{id}/AddToExam")]
-        [Authorize(Roles = "admin")] // Dictionary<Ключ(int): code экзамена на котррый нужно записать этого студента, Значение(int): семестр к которому относится экзамен>
+        [Authorize(Roles = "admin")] // Dictionary<Ключ(int): code экзамена на который нужно записать этого студента, Значение(int): семестр к которому относится экзамен>
         public async Task<IActionResult> AddStudentToExam(int id, [FromBody] Dictionary<int, int> ExamsID)
         {
             return (await administrator.ModifyStudentExams(id, ExamsID, true)) ? Ok() : NotFound();

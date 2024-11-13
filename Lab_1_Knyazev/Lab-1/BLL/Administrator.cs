@@ -325,7 +325,9 @@ namespace Lab_1.BLL
 
             foreach (var StudentMark in StudentMarks)
             {
-                if ((StudentMark.Value < 2) && (StudentMark.Value > 5))
+                //if ((StudentMark.Value < 2) && (StudentMark.Value > 5))
+                //    return -1;
+                if ((StudentMark.Value < 2) || (StudentMark.Value > 5))
                     return -1;
                 var student = await _context.Students.Include(st => st.Sessions).ThenInclude(ses => ses.Exam).FirstOrDefaultAsync(st => st.ID == StudentMark.Key);
                 if (student == null)
