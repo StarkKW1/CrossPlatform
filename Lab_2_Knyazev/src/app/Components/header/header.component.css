@@ -1,0 +1,19 @@
+h1 {
+  padding: 0 1rem;
+}
+
+.testbtn {
+  width: auto;
+}
+
+.logbtn {
+  align-self: center;
+
+}
+
+mat-toolbar {
+  background: #d7e3ff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

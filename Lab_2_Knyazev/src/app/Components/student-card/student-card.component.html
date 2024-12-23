@@ -1,0 +1,11 @@
+@if (profile) {
+  <div class="student-card">
+    <p>ID: {{ profile.id }}</p>
+    <p>ФИО: {{ profile.name }} {{ profile.surname }}</p>
+    <p>Группа: {{ profile.groupNumber }}</p>
+    <p>Средний балл: {{ profile.avrMark }}</p>
+    <p>Кол-во долгов: {{ profile.failsCount }}</p>
+    <button mat-button class="student-card__exam-btn" [routerLink]="['/Students', profile.id]">Подробнее</button>
+  </div>
+}
+

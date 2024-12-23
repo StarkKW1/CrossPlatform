@@ -1,0 +1,14 @@
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Student:</mat-label>
+    <mat-select [(value)]="student">
+      @for (stud of students; track stud.value) {
+        <mat-option [value]="stud.value">{{stud.viewValue}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="">Cancel</button>
+  <button mat-button [mat-dialog-close]="student" cdkFocusInitial>Add</button>
+</mat-dialog-actions>

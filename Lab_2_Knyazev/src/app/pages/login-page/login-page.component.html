@@ -1,0 +1,48 @@
+<!--<form class="login-form">
+  <h1>Вход</h1>
+  <label class="control-label">
+    Логин
+    <input class="input" type="text" placeholder="Введите логин">
+  </label>
+  <label class="control-label">
+    Пароль
+    <input class="input" type="text" placeholder="Введите пароль">
+  </label>
+  <button mat-button class="input-btn">Войти</button>
+</form>-->
+
+<div class="login-content">
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <form #f="ngForm" (ngSubmit)="Login(f.value)">
+        <p>{{msg}}</p>
+        <mat-form-field>
+          <input matInput type="text"
+                 placeholder="User Name"
+                 ngModel name="login" #un="ngModel"
+                 autocomplete="username"
+                 required
+                 (input)="ResetMsg()"
+          >
+          <mat-error *ngIf="un?.errors?.['required']">Login required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password"
+                 placeholder="Password"
+                 ngModel name="password" #pwd="ngModel"
+                 autocomplete="current-password"
+                 required
+                 (input)="ResetMsg()"
+          >
+          <mat-error *ngIf="pwd?.errors?.['required']">Password required</mat-error>
+        </mat-form-field>
+        <button mat-raised-button
+                type="submit"
+                [disabled]="f.invalid"
+        >Log In
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+

@@ -1,0 +1,43 @@
+:host {
+  display: flex;
+  align-items: stretch;
+}
+
+h1 {
+  padding: 0 1rem;
+}
+
+p {
+  padding: 0 1rem;
+}
+
+h2 {
+  padding: 0 1rem;
+}
+
+mat-sidenav-container {
+  flex: 1 0 auto;
+}
+
+mat-sidenav {
+  width: var(--mat-sidenav-container-width);
+  /*background: #d7e3ff;*/
+  /*background: var(--mat-sys-outline-variant);*/
+  border-right: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 0;
+
+  .entry{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding:0.75rem;
+  }
+}
+
+mat-nav-list {
+
+}
+
+mat-sidenav-content{
+
+}

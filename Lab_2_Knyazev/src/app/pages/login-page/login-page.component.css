@@ -1,0 +1,52 @@
+/*:host {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+}*/
+
+/*.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.control-label {
+  display: flex;
+  flex-direction: column;
+  margin: 0.75rem;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.input {
+  display: block;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.input-btn {
+  width: 100%;
+}*/
+
+.login-content {
+  padding: 60px 1em;
+}
+mat-form-field {
+  width: 100%;
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+

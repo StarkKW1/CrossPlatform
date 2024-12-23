@@ -1,0 +1,17 @@
+:host {
+  font-family: "JetBrains Mono", sans-serif;
+
+  display: flex; /* Создаем гибкую структуру */
+  flex-flow: column nowrap; /* Располагаем элементы вертикально */
+  min-height: 100vh; /* Минимальная высота равна высоте вьюпорта */
+}
+
+footer {
+  margin-top: auto; /* Здесь вступает в действие магия Flexbox */
+  flex: 0 0 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  color: var(--mat-sidenav-content-text-color, var(--mat-sys-on-background));
+  background-color: var(--mat-sidenav-content-background-color, var(--mat-sys-background));
+}

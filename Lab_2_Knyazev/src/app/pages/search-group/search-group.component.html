@@ -1,0 +1,11 @@
+<div class="search-student__buttons">
+  <button mat-button class="search-group__add-btn">Добавить группу</button>
+</div>
+<div class="student-card__wrapper">
+  @for (profile of groups; track profile.number) {
+    <div>
+      <p>Номер: {{profile.number}}</p>
+      <p>Староста: {{profile.leader.name}} {{profile.leader.surname}}</p>
+    </div>
+  }
+</div>

@@ -1,0 +1,8 @@
+<div class="search-student__buttons">
+  <button mat-button class="search-exam__add-btn">Добавить студента</button>
+</div>
+<div class="student-card__wrapper">
+  @for (profile of students; track profile.id) {
+    <app-student-card [profile]="profile"></app-student-card>
+  }
+</div>

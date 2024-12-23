@@ -1,0 +1,9 @@
+<div class="search-exam__buttons">
+  <button mat-button class="search-exam__add-btn">Добавить экзамен</button>
+</div>
+<div class="search-exam__wrapper">
+  @for (profile of exams; track profile.code) {
+    <app-exam-card [profile]="profile"></app-exam-card>
+  }
+</div>
+

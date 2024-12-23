@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <button mat-stroked-button (click)="toggleSidenav()" class="testbtn" style="width: auto">
+    <mat-icon>menu</mat-icon>
+    menu
+  </button>
+  <h1>Knyazev Vladislav Lab-2 "University"</h1>
+  <button class="logbtn" mat-stroked-button aria-label="Login button" [routerLink]="['/login']">
+    <mat-icon> account_circle</mat-icon>
+    <span> Logout </span>
+  </button>
+</mat-toolbar>

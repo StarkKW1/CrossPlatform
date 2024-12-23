@@ -1,0 +1,35 @@
+<div class="exam-profile__buttons">
+  <button mat-button class="exam-profile__update-btn" (click)="updateExam()">Редактировать экзамен</button>
+  <button mat-button class="exam-profile__delete-btn" (click)="deleteExam()">Удалить экзамен</button>
+</div>
+<div class="exam-profile__card">
+  <p>ID: {{exam?.code}}</p>
+  <p>Предмет: {{exam?.subject}}</p>
+  <p>Профессор: {{exam?.professor}}</p>
+  <p>Аудитория: {{exam?.auditori}}</p>
+  <p>Дата: {{exam?.date}}</p>
+</div>
+<div class="exam-profile__students">
+  <span>Все студенты на экзамене:</span>
+  <button mat-button class="exam-profile__add-student-btn" (click)="addStudent()">Добавить</button>
+  @for (student of students; track student.id) {
+    <div class="exam-profile__student">
+      <p>ID: {{student.id}}</p>
+      <p>ФИО: {{student.name}} {{student.surname}}</p>
+      <p>Группа: {{student.groupNumber}}</p>
+      <button mat-button class="exam-profile__delete-student-btn" (click)="removeStudent(student.id)">Удалить</button>
+    </div>
+  }
+</div>
+<div class="exam-profile__students">
+  <p>Несдавшие стеденты:</p>
+  @for (student of failStudents; track student.id) {
+    <div class="exam-profile__student">
+      <p>ID: {{student.id}}</p>
+      <p>ФИО: {{student.name}} {{student.surname}}</p>
+      <p>Группа: {{student.groupNumber}}</p>
+    </div>
+  }
+</div>
+
+

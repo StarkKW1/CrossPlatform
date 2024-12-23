@@ -1,0 +1,40 @@
+<div class="student-profile__buttons">
+  <button mat-button class="student-profile__update-btn" (click)="updateStudent()">Редактировать студента</button>
+  <button mat-button class="student-profile__delete-btn" (click)="daleteStudent()">Удалить студента</button>
+</div>
+@if (profile) {
+  <div class="student-profile__card">
+    <p>ID: {{ profile.id }}</p>
+    <p>ФИО: {{ profile.name }} {{ profile.surname }}</p>
+    <p>Группа: {{ profile.groupNumber }}</p>
+    <p>Средний балл: {{ profile.avrMark }}</p>
+    <p>Кол-во долгов: {{ profile.failsCount }}</p>
+    <!--<button mat-button class="student-card__exam-btn">Экзамены</button>-->
+  </div>
+  <div class="student-profile__marks">
+    <p style="margin-top: 32px">Оценки: </p>
+    @for (mark of profile.marks; track $index) {
+      <div class="student-profile__mark">
+        <p>Предмет: {{ mark.subject }}</p>
+        <p>Оценка: {{ mark.value }}</p>
+      </div>
+    }
+  </div>
+
+  <div class="student-profile__exams">
+    <p style="margin-top: 32px">Экзамены: </p>
+    @for (exam of profile.exams; track exam.code) {
+      <!--<app-exam-card [profile]="exam"></app-exam-card>-->
+      <div class="student-profile__exam">
+        <p>Code: {{ exam.code }}</p>
+        <p>Предмет: {{ exam.subject }}</p>
+        <p>Профессор: {{ exam.professor }}</p>
+        <p>Аудитория: {{ exam.auditori }}</p>
+        <p>Дата: {{ exam.date | date:'dd.MM.yyyy HH:mm' }}</p>
+      </div>
+    }
+  </div>
+
+}
+
+

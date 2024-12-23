@@ -1,0 +1,56 @@
+.student-profile__buttons {
+  margin: 32px 24px;
+
+}
+
+.student-profile__update-btn {
+
+}
+
+.student-profile__delete-btn {
+  color: crimson;
+  /*margin-left: 32px;*/
+}
+
+
+.student-profile__card {
+  margin: 32px 24px;
+  border: 1px solid #000;
+  padding: 32px 24px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.student-profile__marks {
+  margin: 32px 24px;
+}
+
+.student-profile__mark {
+  margin: 24px 0px;
+  border: 1px solid #000;
+  padding: 0px 24px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.student-profile__exams {
+  margin: 32px 24px;
+}
+
+.student-profile__exam {
+  margin: 24px 0px;
+  border: 1px solid #000;
+  padding: 0px 24px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
